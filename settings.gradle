@@ -1,0 +1,16 @@
+pluginManagement {
+    repositories {
+        maven {
+            url = uri("http://127.0.0.1:8090")
+            allowInsecureProtocol = true
+        }
+        gradlePluginPortal()
+        maven { url = 'https://maven.neoforged.net/releases' }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+rootProject.name = 'easytier-mc'
