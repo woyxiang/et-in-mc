@@ -1,0 +1,55 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        run: gradle build -x test --no-daemon
+
+      - name: Unit and integration tests
+        # EasyTierOverlayIT auto-skips when the core binary is absent;
+        # download the pinned 2.6.4 build to run the full overlay IT.
+        shell: bash
+        run: |
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            curl -sL https://github.com/EasyTier/EasyTier/releases/download/v2.6.4/easytier-linux-x86_64-v2.6.4.zip -o et.zip
+            unzip -o et.zip -d ettools
+            gradle test --no-daemon \
+              -Detmc.core.bin="$PWD/ettools/easytier-core" \
+              -Detmc.nic.ip="$(hostname -I | awk '{print $1}')"
+          else
+            gradle test --no-daemon
+          fi
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.os }}
+          path: build/reports/tests/
+
+      - name: Upload mod jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: etmc-${{ matrix.os }}
+          path: build/libs/*.jar

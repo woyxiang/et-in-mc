@@ -123,4 +123,14 @@ public final class ClientNetworkController {
     public synchronized NetworkManager networkManager() {
         return networkManager;
     }
+
+
+    /** Persists a profile to the config files (UI "Save" path). */
+    public synchronized void persistProfile(NetworkProfile profile) {
+        try {
+            ModConfig.save(profile, configDir);
+        } catch (Exception e) {
+            this.configErrors = List.of("failed to save config: " + e.getMessage());
+        }
+    }
 }

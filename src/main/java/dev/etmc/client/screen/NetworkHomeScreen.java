@@ -60,8 +60,16 @@ public class NetworkHomeScreen extends Screen {
                         Component.literal("Host World"), b -> hostWorldViaEasyTier())
                 .bounds(x + PANEL_WIDTH / 2 + 2, y + 96, PANEL_WIDTH / 2 - 2, 20).build());
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                        Component.literal("Settings"), b -> minecraft.setScreen(
+                                new AdvancedSettingsScreen(this)))
+                .bounds(x, y + 120, PANEL_WIDTH / 2 - 2, 20).build());
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                        Component.literal("Ports"), b -> minecraft.setScreen(
+                                new PortSettingsScreen(this)))
+                .bounds(x + PANEL_WIDTH / 2 + 2, y + 120, PANEL_WIDTH / 2 - 2, 20).build());
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                         Component.literal("Back"), b -> onClose())
-                .bounds(x, y + 120, PANEL_WIDTH, 20).build());
+                .bounds(x, y + 144, PANEL_WIDTH, 20).build());
         refreshStatus();
     }
 
