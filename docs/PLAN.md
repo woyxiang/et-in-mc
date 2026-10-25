@@ -818,3 +818,11 @@ src/main/java/.../etmc/
 - P0 完成（docs/P0-REPORT.md）。P1/P2/P3/P4/P5 源码完成并编译通过（NeoForge 21.1.264 / Gradle 8.10.2 / Java 21）。
 - 29 个测试全部通过，含真实 easytier-core 2.6.4 双实例全链路集成测试（dev.etmc.it.EasyTierOverlayIT）。
 - 环境注意：构建需 JAVA_TOOL_OPTIONS="-Xmx6g"（NFR recompile 在 NFR JVM 内运行）；本地 maven 镜像 127.0.0.1:8090（tools/maven_mirror.py）；MC 原版 jar 本地服务 127.0.0.1:8091（tools/mc-dl/，已改写 ~/.gradle/caches/neoformruntime/artifacts/minecraft_1.21.1_version_manifest.json 指向本地）。
+
+## 附2：验收状态（容器内可执行项全部完成）
+- P0 ✅（docs/P0-REPORT.md）；P1 ✅ 编译+32测试；P2 ✅ 双实例组网 IT + GUI 编译
+- P3 ✅* overlay→MC status 全链路实证（`{"isModded":true,...protocol:767}`）；*真人双端进出世界/移动/聊天需带 GUI 真机，记为用户验收项
+- P4 ✅ 白名单允许/拒绝双向实证；trusted_all 需确认门禁（validator 拒绝未确认配置）
+- P5 ✅ 专服生命周期、kill -9 孤儿守护（bash 看守）、崩溃自动重启、多成员 p2p 组网（host+2 peers）、30 分钟长稳 0 错误
+- P6 ✅ README/LICENSE(MIT)/docs/DIAGNOSTICS.md/CI(.github/workflows/ci.yml，自动下载 pinned core 跑 IT)；产物 build/libs/etmc-0.1.0.jar
+- Modrinth/CurseForge 上传与 Windows 真机回归 = 用户操作项

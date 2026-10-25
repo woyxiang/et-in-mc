@@ -95,3 +95,20 @@ WARN StatusConsoleListener Advanced terminal features are not available in this 
 [16:27:03] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:27:03.871121277+08:00  INFO CORE::INSTANCE::CONNECTION: [8e597472-0701-4eb0-b29e-74c5f9b2c90b] peer connection removed conn_info=PeerConnInfo { my_peer_id: 4271118469, dst_peer_id: 2043345223, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:44423" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:44423" }) }) }
 [16:27:04] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:27:04.073397045+08:00  INFO CORE::INSTANCE: [8e597472-0701-4eb0-b29e-74c5f9b2c90b] peer removed peer_id=2471329755
 [16:27:04] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:27:04.07478291+08:00  INFO CORE::INSTANCE: [8e597472-0701-4eb0-b29e-74c5f9b2c90b] peer removed peer_id=2043345223
+
+> Task :runServer FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':runServer'.
+> Process 'command '/usr/lib/jvm/java-21-openjdk-amd64/bin/java'' finished with non-zero exit value 137
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 30m 32s
+7 actionable tasks: 1 executed, 6 up-to-date
