@@ -10,6 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -38,6 +39,21 @@ public final class ClientInitializer {
             Minecraft mc = Minecraft.getInstance();
             while (openNetworkHome != null && openNetworkHome.consumeClick()) {
                 mc.setScreen(new NetworkHomeScreen(null));
+            }
+        }
+
+        /**
+         * Plan §8.1: when the host leaves the world, stop the overlay and
+         * drop the world-scoped port mappings and state.
+         */
+        @SubscribeEvent
+        public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
+            ClientNetworkController c = ClientNetworkController.get();
+            if (c.current() != null
+                    && c.current().role() == dev.etmc.config.NetworkProfile.Role.HOST) {
+                c.disconnect();
+                EasyTierMinecraft.LOGGER.info("[etmc] left world: overlay stopped, "
+                        + "temporary port mappings cleared");
             }
         }
     }
