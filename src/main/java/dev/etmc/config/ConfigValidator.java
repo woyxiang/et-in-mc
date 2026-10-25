@@ -62,6 +62,10 @@ public final class ConfigValidator {
             }
         }
 
+        if ("trusted_all".equals(p.exposureMode()) && !p.trustedAllConfirmed()) {
+            errors.add("trusted_all requires trusted_all_confirmed=true "
+                    + "(plan §5.1: explicit user confirmation mandatory)");
+        }
         if (p.role() == dev.etmc.config.NetworkProfile.Role.HOST
                 && p.exposeLocalCidr() != null && p.exposeLocalCidr().contains("/")) {
             int prefix = NetworkProfile.prefixLengthOf(p.exposeLocalCidr());
