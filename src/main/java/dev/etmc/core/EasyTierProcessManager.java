@@ -6,6 +6,8 @@ import dev.etmc.util.SecretRedactor;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import dev.etmc.util.PlatformDetector;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -75,6 +77,43 @@ public final class EasyTierProcessManager implements AutoCloseable {
                 && st != ProcessState.STOPPING;
     }
 
+    private volatile boolean hookInstalled;
+    /** PID of the JVM that owns this manager; watched for orphan cleanup. */
+    private final long ownerPid = ProcessHandle.current().pid();
+
+    /**
+     * Linux orphan safety (plan §12.4): the JVM can die without running
+     * shutdown hooks (halt(), kill -9). A small bash supervisor outlives it:
+     * it forwards TERM to the core, and kills the core once the owning JVM
+     * pid disappears. On other platforms the argv is used as-is; normal
+     * termination paths still clean up via hooks/events.
+     */
+    private List<String> wrapForOrphanSafety(List<String> argv) {
+        if (!PlatformDetector.isLinux()) {
+            return argv;
+        }
+        String script = """
+                WATCH="$1"; shift
+                "$@" &
+                ET=$!
+                trap 'kill "$ET" 2>/dev/null' TERM INT
+                while kill -0 "$WATCH" 2>/dev/null && kill -0 "$ET" 2>/dev/null; do
+                  sleep 2
+                done
+                kill "$ET" 2>/dev/null
+                wait "$ET" 2>/dev/null
+                exit $?
+                """;
+        List<String> wrapped = new ArrayList<>();
+        wrapped.add("/bin/bash");
+        wrapped.add("-c");
+        wrapped.add(script);
+        wrapped.add("etmc-supervisor");
+        wrapped.add(Long.toString(ownerPid));
+        wrapped.addAll(argv);
+        return wrapped;
+    }
+
     public synchronized void start() {
         if (state.get() != ProcessState.STOPPED && state.get() != ProcessState.ERROR) {
             throw new IllegalStateException("cannot start from state " + state.get());
@@ -92,7 +131,7 @@ public final class EasyTierProcessManager implements AutoCloseable {
             throw new IllegalStateException("cannot create work dir " + workDir, e);
         }
         try {
-            process = new ProcessBuilder(argv)
+            process = new ProcessBuilder(wrapForOrphanSafety(argv))
                     .directory(workDir.toFile())
                     .redirectErrorStream(true)
                     .start();
@@ -109,6 +148,21 @@ public final class EasyTierProcessManager implements AutoCloseable {
         LOG.info("[etmc] easytier started pid={} role={} listen={} rpc=127.0.0.1:{}",
                 pid, profile.role(), profile.listenPort(), profile.rpcPort());
         Thread.ofPlatform().name("etmc-process-watch").daemon(true).start(this::watchLoop);
+        if (!hookInstalled) {
+            hookInstalled = true;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    if (isRunning()) {
+                        stop();
+                    }
+                } catch (RuntimeException ignored) {
+                    // JVM is going down; best effort only
+                }
+            }, "etmc-core-cleanup"));
+            // NOTE: an in-JVM watchdog cannot survive JVM death; on Linux the
+            // command is wrapped by a bash supervisor (see wrapForOrphanSafety)
+            // that outlives the JVM and kills the core when the owner is gone.
+        }
     }
 
     /**

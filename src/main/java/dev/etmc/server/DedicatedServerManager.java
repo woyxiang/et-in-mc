@@ -57,7 +57,9 @@ public final class DedicatedServerManager {
     }
 
     private synchronized void startFor(MinecraftServer server) {
-        this.configDir = server.getServerDirectory();
+        // FMLPaths resolves <gameDir>/config in both dev and production;
+        // server.getServerDirectory() is relative and points at run/ in dev.
+        this.configDir = net.neoforged.fml.loading.FMLPaths.CONFIGDIR.get();
         ModConfig.Loaded loaded = ModConfig.load(configDir);
         this.profile = loaded.profile();
         if (!loaded.errors().isEmpty()) {

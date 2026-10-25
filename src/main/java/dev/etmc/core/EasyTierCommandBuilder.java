@@ -50,8 +50,11 @@ public final class EasyTierCommandBuilder implements EasyTierProcessManager.Comm
         }
         argv.add("--listeners");
         argv.add("tcp://127.0.0.1:" + p.listenPort());
-        argv.add("--peers");
-        argv.add(String.join(" ", p.peers()));
+        // repeat the flag per peer; easytier treats each as a separate peer URL
+        for (String peer : p.peers()) {
+            argv.add("--peers");
+            argv.add(peer);
+        }
         for (PortRule rule : p.forwards()) {
             if (rule.enabled()) {
                 argv.add("--port-forward");
@@ -76,12 +79,14 @@ public final class EasyTierCommandBuilder implements EasyTierProcessManager.Comm
 
     private void addWhitelists(List<String> argv, NetworkProfile p) {
         if (!p.tcpWhitelist().isEmpty()) {
+            // each entry must be its own argv element; easytier rejects
+            // "22387 25565" as one string ("Invalid port number")
             argv.add("--tcp-whitelist");
-            argv.add(String.join(" ", p.tcpWhitelist()));
+            argv.addAll(p.tcpWhitelist());
         }
         if (!p.udpWhitelist().isEmpty()) {
             argv.add("--udp-whitelist");
-            argv.add(String.join(" ", p.udpWhitelist()));
+            argv.addAll(p.udpWhitelist());
         }
     }
 }

@@ -36,4 +36,8 @@ public final class PlatformDetector {
         String archProp = System.getProperty("os.arch", "").toLowerCase();
         return new Platform(os, archProp);
     }
+
+    public static boolean isLinux() {
+        return "linux".equals(detect().os());
+    }
 }

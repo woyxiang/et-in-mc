@@ -1,0 +1,125 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx1g
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :generateModMetadata UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :writeServerLegacyClasspath UP-TO-DATE
+> Task :prepareServerRun UP-TO-DATE
+
+> Task :runServer
+Picked up JAVA_TOOL_OPTIONS: -Xmx1g
+WARN StatusConsoleListener Advanced terminal features are not available in this environment
+[16:04:19] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserverdev, --gameDir, ., --fml.fmlVersion, 4.0.45, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.264, --fml.neoFormVersion, 20240808.144430, --nogui]
+[16:04:19] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: JVM identified as Debian OpenJDK 64-Bit Server VM 21.0.12.1+1-1-deb13u1-Debian
+[16:04:19] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.12.1 by Debian; OS Linux arch amd64 version 6.12.74+deb13+1-amd64
+[16:04:19] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserverdev
+[16:04:19] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/home/ecs-user/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/26d01f0567ab46e9ca0d2ed89d0ecc11aadbd433/sponge-mixin-0.16.4+mixin.0.8.7.jar%2394!/ Service=ModLauncher Env=SERVER
+[16:04:20] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[16:04:20] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		EasyTier for Minecraft 0.1.0 (etmc)
+		Minecraft 1.21.1 (minecraft)
+		NeoForge 21.1.264 (neoforge)
+[16:04:23] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserverdev' with arguments [--gameDir, ., --nogui]
+[16:04:24] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[16:04:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[16:04:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[16:04:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[16:04:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[16:04:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[16:04:32] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.264, for MC 1.21.1
+[16:04:32] [modloading-worker-0/INFO] [etmc/]: [etmc] EasyTier for Minecraft 0.1.0 (P1) constructing
+[16:04:33] [modloading-sync-worker/INFO] [etmc/]: [etmc] config ok: role=HOST name=dedicated-it listen=22387 rpc=26110 hostIp=10.126.126.1 forwards=0
+[16:04:33] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[16:04:33] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/ecs-user/workspace/et-in-mc/build/moddev/artifacts/neoforge-21.1.264.jar%23125!/assets/.mcassetsroot' uses unexpected schema
+[16:04:33] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/ecs-user/workspace/et-in-mc/build/moddev/artifacts/neoforge-21.1.264.jar%23125!/data/.mcassetsroot' uses unexpected schema
+[16:04:35] [main/INFO] [minecraft/RecipeManager]: Loaded 1290 recipes
+[16:04:35] [main/INFO] [minecraft/AdvancementTree]: Loaded 1399 advancements
+[16:04:36] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.21.1
+[16:04:36] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[16:04:36] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[16:04:36] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[16:04:36] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[16:04:36] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[16:04:36] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[16:04:36] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[16:04:36] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[16:04:36] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[16:04:36] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[16:04:37] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[16:04:37] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[16:04:37] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 432 ms
+[16:04:37] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.806s)! For help, type "help"
+[16:04:37] [Server thread/INFO] [ne.ne.ne.ga.GameTestHooks/]: Enabled Gametest Namespaces: []
+[16:04:37] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[16:04:37] [Server thread/INFO] [etmc/]: [etmc] easytier started pid=1925747 role=HOST listen=22387 rpc=127.0.0.1:26110
+[16:04:37] [Server thread/INFO] [etmc/]: EasyTier overlay starting for dedicated server
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:04:38.595786262+08:00  INFO CORE: Starting easytier from cli with config:
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] ############### TOML ###############
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] ipv4 = "10.126.126.1"
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] listeners = ["tcp://0.0.0.0:22387"]
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] tcp_whitelist = [
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier]     "22387",
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier]     "25565",
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] ]
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] udp_whitelist = []
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] [network_identity]
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] network_name = "dedicated-it"
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] network_secret = "***"
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] [[proxy_network]]
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] cidr = "127.0.0.1"
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] mapped_cidr = "10.126.126.1"
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] [flags]
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] no_tun = true
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] use_smoltcp = true
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] -----------------------------------
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:04:38.599033696+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new listener added listener=tcp://0.0.0.0:22387
+[16:04:38] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:04:38.599044369+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new listener added listener=tcp://[::]:22387
+[16:05:14] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:14.509725888+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new connection accepted local="tcp://0.0.0.0:22387" remote="tcp://172.25.87.100:40575"
+[16:05:14] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:14.514411814+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new peer connection added conn_info=PeerConnInfo { my_peer_id: 623350218, dst_peer_id: 3957573833, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:40575" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:40575" }) }) }
+[16:05:14] [etmc-process-log/INFO] [etmc/]: [etmc] easytier connected to the network
+[16:05:14] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:14.514545487+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new peer added peer_id=3957573833
+[16:05:34] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:34.512610561+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new connection accepted local="tcp://0.0.0.0:22387" remote="tcp://172.25.87.100:38689"
+[16:05:34] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:34.512863135+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new peer connection added conn_info=PeerConnInfo { my_peer_id: 623350218, dst_peer_id: 3982011960, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:38689" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:38689" }) }) }
+[16:05:34] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:34.512875885+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new peer added peer_id=3982011960
+[16:05:49] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:49.975375796+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] peer connection removed conn_info=PeerConnInfo { my_peer_id: 623350218, dst_peer_id: 3982011960, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:38689" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:38689" }) }) }
+[16:05:49] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:49.987248041+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] peer connection removed conn_info=PeerConnInfo { my_peer_id: 623350218, dst_peer_id: 3957573833, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:40575" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:40575" }) }) }
+[16:05:50] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:50.627428193+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] peer removed peer_id=3957573833
+[16:05:50] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:05:50.627452381+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] peer removed peer_id=3982011960
+[16:06:04] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:06:04.398476374+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new connection accepted local="tcp://0.0.0.0:22387" remote="tcp://172.25.87.100:40263"
+[16:06:04] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:06:04.398553706+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new peer connection added conn_info=PeerConnInfo { my_peer_id: 623350218, dst_peer_id: 1360487143, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:40263" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:40263" }) }) }
+[16:06:04] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:06:04.398564382+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] new peer added peer_id=1360487143
+[16:06:15] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:06:15.024801278+08:00  INFO CORE::INSTANCE::CONNECTION: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] peer connection removed conn_info=PeerConnInfo { my_peer_id: 623350218, dst_peer_id: 1360487143, tunnel_info: Some(TunnelInfo { tunnel_type: "tcp", local_addr: Some(Url { url: "tcp://0.0.0.0:22387" }), remote_addr: Some(Url { url: "tcp://172.25.87.100:40263" }), resolved_remote_addr: Some(Url { url: "tcp://172.25.87.100:40263" }) }) }
+[16:06:17] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:06:17.637759563+08:00  INFO CORE::INSTANCE: [14143240-2d6d-44fc-acbd-55c4b03b5bb6] peer removed peer_id=1360487143
+[16:07:34] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:07:34.381490293+08:00  WARN CORE: terminate signal received, exiting...
+[16:07:34] [etmc-process-log/INFO] [etmc/]: [easytier] 2026-10-25T16:07:34.390427486+08:00  INFO CORE: Stopping easytier...
+[16:07:34] [etmc-process-watch/WARN] [etmc/]: [etmc] easytier exited unexpectedly code=0 uptimeMs=176790 restarts=0/5
+Exception in thread "etmc-process-restart" java.lang.IllegalStateException: cannot start from state RECONNECTING
+	at TRANSFORMER/etmc@0.1.0/dev.etmc.core.EasyTierProcessManager.start(EasyTierProcessManager.java:82)
+	at TRANSFORMER/etmc@0.1.0/dev.etmc.core.EasyTierProcessManager.lambda$watchLoop$1(EasyTierProcessManager.java:197)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+> Task :runServer FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':runServer'.
+> Process 'command '/usr/lib/jvm/java-21-openjdk-amd64/bin/java'' finished with non-zero exit value 137
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 7m 17s
+7 actionable tasks: 1 executed, 6 up-to-date

@@ -54,8 +54,14 @@ public class NetworkHomeScreen extends Screen {
                         Component.literal("Join World"), b -> joinWorld())
                 .bounds(x + PANEL_WIDTH / 2 + 2, y + 72, PANEL_WIDTH / 2 - 2, 20).build());
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                        Component.literal("Copy Network Info"), b -> copyNetworkInfo())
+                .bounds(x, y + 96, PANEL_WIDTH / 2 - 2, 20).build());
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                        Component.literal("Host World"), b -> hostWorldViaEasyTier())
+                .bounds(x + PANEL_WIDTH / 2 + 2, y + 96, PANEL_WIDTH / 2 - 2, 20).build());
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                         Component.literal("Back"), b -> onClose())
-                .bounds(x, y + 96, PANEL_WIDTH, 20).build());
+                .bounds(x, y + 120, PANEL_WIDTH, 20).build());
         refreshStatus();
     }
 
@@ -73,6 +79,54 @@ public class NetworkHomeScreen extends Screen {
         if (!errs.isEmpty()) {
             detailLine += " | errors: " + errs.get(0);
         }
+    }
+
+    /** Plan §4.4: explicit copy action exposes the secret (hidden otherwise). */
+    private void copyNetworkInfo() {
+        ClientNetworkController c = ClientNetworkController.get();
+        NetworkProfile p = c.current() != null ? c.current() : c.profileFromConfig();
+        if (p == null) {
+            detailLine = "no network profile";
+            return;
+        }
+        String info = "network_name=" + p.networkName() + "\n"
+                + "network_secret=" + p.networkSecret() + "\n"
+                + "peers=" + String.join(" ", p.peers()) + "\n"
+                + "host_ip=" + p.hostIp() + "\n"
+                + "minecraft_port=" + dev.etmc.minecraft.LanWorldManager.PREFERRED_LAN_PORT;
+        minecraft.keyboardHandler.setClipboard(info);
+        detailLine = "network info copied to clipboard";
+    }
+
+    /**
+     * Plan §8.1: from inside a singleplayer world, open LAN on a fixed port
+     * and bring the overlay up as HOST in one click.
+     */
+    private void hostWorldViaEasyTier() {
+        if (!dev.etmc.minecraft.LanWorldManager.inSinglePlayerWorld()) {
+            detailLine = "enter a singleplayer world first";
+            return;
+        }
+        int lanPort = dev.etmc.minecraft.LanWorldManager.openLan(
+                net.minecraft.world.level.GameType.SURVIVAL, false, true);
+        if (lanPort <= 0) {
+            detailLine = "failed to open LAN";
+            return;
+        }
+        ClientNetworkController c = ClientNetworkController.get();
+        NetworkProfile p = c.profileFromConfig().role(NetworkProfile.Role.HOST)
+                .networkName(c.current() != null ? c.current().networkName() : null);
+        if (p.networkName() == null || p.networkName().isBlank()) {
+            p.networkName(NetworkFormScreen.randomName());
+            p.networkSecret(NetworkFormScreen.randomSecret());
+        }
+        detailLine = "lan=" + lanPort + " starting overlay...";
+        new Thread(() -> {
+            boolean ok = c.connect(p);
+            minecraft.execute(() -> detailLine = ok
+                    ? "hosting: lan=" + lanPort + " net=" + p.networkName()
+                    : "overlay start failed");
+        }, "etmc-host").start();
     }
 
     /**

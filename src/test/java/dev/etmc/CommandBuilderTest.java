@@ -59,8 +59,11 @@ class CommandBuilderTest {
         assertEquals("127.0.0.1/32->10.126.126.1/32", argv.get(i++));
         assertEquals("--listeners", argv.get(i++));
         assertEquals("tcp://0.0.0.0:21010", argv.get(i++));
+        // each whitelist entry is its own argv element (easytier rejects a
+        // space-joined string with "Invalid port number")
         assertEquals("--tcp-whitelist", argv.get(i++));
-        assertEquals("25565 30000-30005", argv.get(i++));
+        assertEquals("25565", argv.get(i++));
+        assertEquals("30000-30005", argv.get(i++));
         assertEquals("--udp-whitelist", argv.get(i++));
         assertEquals("24454", argv.get(i++));
         assertEquals("--rpc-portal", argv.get(i++));
