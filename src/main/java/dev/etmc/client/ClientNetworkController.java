@@ -133,4 +133,10 @@ public final class ClientNetworkController {
             this.configErrors = List.of("failed to save config: " + e.getMessage());
         }
     }
+
+
+    /** Current node info from the polling loop; null when offline. */
+    public synchronized dev.etmc.network.NodeInfo node() {
+        return networkManager == null ? null : networkManager.node();
+    }
 }

@@ -80,6 +80,10 @@ public class NetworkHomeScreen extends Screen {
         List<PeerInfo> peers = c.peers();
         statusLine = "process: " + ps + " | network: " + np;
         detailLine = "peers: " + peers.size();
+        var node = c.node();
+        if (node != null && node.virtualIp() != null && !node.virtualIp().isEmpty()) {
+            detailLine += " | ip: " + dev.etmc.network.NodeInfo.stripPrefixLen(node.virtualIp());
+        }
         if (c.current() != null) {
             detailLine += " | net: " + c.current().networkName();
         }
