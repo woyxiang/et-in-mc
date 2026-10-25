@@ -62,6 +62,14 @@ public final class ConfigValidator {
             }
         }
 
+        if (p.role() == dev.etmc.config.NetworkProfile.Role.HOST
+                && p.exposeLocalCidr() != null && p.exposeLocalCidr().contains("/")) {
+            int prefix = NetworkProfile.prefixLengthOf(p.exposeLocalCidr());
+            if (prefix < 24) {
+                errors.add("proxy-networks mapping prefix too broad: /" + prefix
+                        + " (minimum /24, equal prefix lengths are mandatory)");
+            }
+        }
         // Host proxy mapping: equal prefix length on both sides (P0 finding #2).
         if (p.role() == NetworkProfile.Role.HOST) {
             String mapping = p.hostProxyNetworkMapping();

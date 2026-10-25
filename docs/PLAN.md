@@ -811,3 +811,10 @@ src/main/java/.../etmc/
 需要额外网络端口的 Mod 可以通过配置文件指定，可信服务器可以选择全部端口访问模式。
 
 整个过程保持无 TUN、不要求常规管理员权限、不自动改动系统网络配置，同时尽可能复用 EasyTier 官方原生能力。
+
+---
+
+## 附：开发状态（自动追加）
+- P0 完成（docs/P0-REPORT.md）。P1/P2/P3/P4/P5 源码完成并编译通过（NeoForge 21.1.264 / Gradle 8.10.2 / Java 21）。
+- 29 个测试全部通过，含真实 easytier-core 2.6.4 双实例全链路集成测试（dev.etmc.it.EasyTierOverlayIT）。
+- 环境注意：构建需 JAVA_TOOL_OPTIONS="-Xmx6g"（NFR recompile 在 NFR JVM 内运行）；本地 maven 镜像 127.0.0.1:8090（tools/maven_mirror.py）；MC 原版 jar 本地服务 127.0.0.1:8091（tools/mc-dl/，已改写 ~/.gradle/caches/neoformruntime/artifacts/minecraft_1.21.1_version_manifest.json 指向本地）。

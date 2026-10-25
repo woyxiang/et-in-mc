@@ -1,0 +1,58 @@
+> Task :createMinecraftArtifacts
+Loaded 131 artifacts from /home/ecs-user/workspace/et-in-mc/build/tmp/createMinecraftArtifacts/nfrt_artifact_manifest.properties
+[1m*** Started working on [4mdownloadJson[23;0m[23;0m
+  ↓ https://piston-meta.mojang.com/mc/game/version_manifest_v2.json
+  ↓ https://piston-meta.mojang.com/v1/packages/1757c8b1fbfc6b638504e1f6cceb05893f7389d5/1.21.1.json
+ [1m[92m✓[23;0m Completed [4mdownloadJson[23;0m in 24.30s
+[1m*** Started working on [4mdownloadClientMappings[23;0m[23;0m
+[1m*** Started working on [4mdownloadClient[23;0m[23;0m
+  ↓ https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar
+  ↓ https://piston-data.mojang.com/v1/objects/2244b6f072256667bcd9a73df124d6c58de77992/client.txt
+[1m*** Started working on [4mdownloadServer[23;0m[23;0m
+  ↓ https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar
+Total runtime: 1503.10s
+
+net.neoforged.neoform.runtime.graph.NodeExecutionException: Node action for downloadClient failed
+	at net.neoforged.neoform.runtime.engine.NeoFormEngine.runNode(NeoFormEngine.java:613)
+	at net.neoforged.neoform.runtime.engine.NeoFormEngine.lambda$getWaitCondition$5(NeoFormEngine.java:559)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:314)
+	at java.base/java.lang.VirtualThread.run(VirtualThread.java:329)
+Caused by: java.io.IOException: BUFFER_UNDERFLOW with EOF, 7859 bytes non decrypted.
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:970)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at net.neoforged.neoform.runtime.downloads.DownloadManager.download(DownloadManager.java:95)
+	at net.neoforged.neoform.runtime.downloads.DownloadManager.download(DownloadManager.java:52)
+	at net.neoforged.neoform.runtime.artifacts.ArtifactManager.lambda$download$4(ArtifactManager.java:311)
+	at net.neoforged.neoform.runtime.artifacts.ArtifactManager.download(ArtifactManager.java:291)
+	at net.neoforged.neoform.runtime.artifacts.ArtifactManager.download(ArtifactManager.java:311)
+	at net.neoforged.neoform.runtime.artifacts.ArtifactManager.downloadFromManifest(ArtifactManager.java:228)
+	at net.neoforged.neoform.runtime.actions.DownloadFromVersionManifestAction.run(DownloadFromVersionManifestAction.java:25)
+	at net.neoforged.neoform.runtime.engine.NeoFormEngine.runNode(NeoFormEngine.java:602)
+	... 4 more
+Caused by: java.io.IOException: BUFFER_UNDERFLOW with EOF, 7859 bytes non decrypted.
+	at java.net.http/jdk.internal.net.http.common.SSLFlowDelegate$Reader.processData(SSLFlowDelegate.java:492)
+	at java.net.http/jdk.internal.net.http.common.SSLFlowDelegate$Reader$ReaderDownstreamPusher.run(SSLFlowDelegate.java:283)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$LockingRestartableTask.run(SequentialScheduler.java:182)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:207)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+> Task :createMinecraftArtifacts FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':createMinecraftArtifacts'.
+> Process 'command '/usr/lib/jvm/java-21-openjdk-amd64/bin/java'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 30m 54s
+1 actionable task: 1 executed

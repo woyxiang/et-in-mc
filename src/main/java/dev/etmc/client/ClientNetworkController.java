@@ -9,7 +9,7 @@ import dev.etmc.network.NetworkManager;
 import dev.etmc.network.NetworkPhase;
 import dev.etmc.network.PeerInfo;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -55,6 +55,12 @@ public final class ClientNetworkController {
      */
     public synchronized boolean connect(NetworkProfile profile) {
         disconnect();
+        try {
+            ModConfig.save(profile, configDir);
+        } catch (Exception e) {
+            configErrors = List.of("failed to save network config: " + e.getMessage());
+            return false;
+        }
         this.current = profile;
         try {
             processManager = new EasyTierProcessManager(

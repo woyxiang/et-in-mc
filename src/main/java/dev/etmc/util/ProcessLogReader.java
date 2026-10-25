@@ -31,6 +31,14 @@ public final class ProcessLogReader {
         this.prefix = prefix;
     }
 
+    private volatile java.util.function.Consumer<String> onLine;
+
+    /** Optional per-line hook used by the process state machine. */
+    public ProcessLogReader onLine(java.util.function.Consumer<String> consumer) {
+        this.onLine = consumer;
+        return this;
+    }
+
     public void start(InputStream in) {
         thread = Thread.ofPlatform().name("etmc-process-log").daemon(true).unstarted(() -> {
             try (var reader = new BufferedReader(
@@ -40,6 +48,14 @@ public final class ProcessLogReader {
                     String safe = SecretRedactor.maskSecretArg(redactor.redact(line));
                     record(safe);
                     logger.info("{} {}", prefix, safe);
+                    var hook = onLine;
+                    if (hook != null) {
+                        try {
+                            hook.accept(safe);
+                        } catch (RuntimeException e) {
+                            logger.debug("{} state hook failed: {}", prefix, e.toString());
+                        }
+                    }
                 }
             } catch (IOException e) {
                 // Stream closed by normal shutdown or abrupt process death - both fine here.

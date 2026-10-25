@@ -10,13 +10,12 @@ class PortAllocatorTest {
     @Test
     void freeAndBoundTcpPorts() {
         assertTrue(PortAllocator.isTcpFree(0) == false); // invalid range
-        int port;
         try (java.net.ServerSocket ss = new java.net.ServerSocket(0)) {
-            port = ss.getLocalPort();
+            int port = ss.getLocalPort();
+            assertFalse(PortAllocator.isTcpFree(port), "bound port must report not free");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        assertFalse(PortAllocator.isTcpFree(port), "bound port must report not free");
     }
 
     @Test
@@ -38,13 +37,12 @@ class PortAllocatorTest {
 
     @Test
     void udpProbeWorks() {
-        int port;
         try (java.net.DatagramSocket ds = new java.net.DatagramSocket(0)) {
-            port = ds.getLocalPort();
+            int port = ds.getLocalPort();
+            assertFalse(PortAllocator.isUdpFree(port));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        assertFalse(PortAllocator.isUdpFree(port));
         assertEquals(-1, PortAllocator.pickFree(-5, true, 4));
     }
 }

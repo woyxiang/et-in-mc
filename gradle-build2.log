@@ -1,0 +1,24 @@
+> Task :createMinecraftArtifacts
+> Task :createMinecraftArtifacts FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':createMinecraftArtifacts'.
+> Error while evaluating property 'artifactManifestEntries' of task ':createMinecraftArtifacts'.
+   > Could not resolve all artifacts for configuration ':neoFormRuntimeDependenciesCompileClasspath'.
+      > Could not download icu4j-73.2.jar (com.ibm.icu:icu4j:73.2)
+         > Could not get resource 'https://libraries.minecraft.net/com/ibm/icu/icu4j/73.2/icu4j-73.2.jar'.
+            > Premature end of Content-Length delimited message body (expected: 14,567,819; received: 4,013,536)
+      > Could not download fastutil-8.5.12.jar (it.unimi.dsi:fastutil:8.5.12)
+         > Could not get resource 'https://libraries.minecraft.net/it/unimi/dsi/fastutil/8.5.12/fastutil-8.5.12.jar'.
+            > Premature end of Content-Length delimited message body (expected: 23,326,598; received: 4,160,992)
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1h 25m 11s
+1 actionable task: 1 executed

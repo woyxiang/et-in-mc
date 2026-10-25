@@ -1,0 +1,156 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx6g -Xms256m
+
+> Task :createMinecraftArtifacts
+Picked up JAVA_TOOL_OPTIONS: -Xmx6g -Xms256m
+Loaded 131 artifacts from /home/ecs-user/workspace/et-in-mc/build/tmp/createMinecraftArtifacts/nfrt_artifact_manifest.properties
+[1m*** Started working on [4mdownloadJson[23;0m[23;0m
+ [1m[92m✓[23;0m Completed [4mdownloadJson[23;0m in 0.04s
+[1m*** Started working on [4mdownloadClientMappings[23;0m[23;0m
+[1m*** Started working on [4mdownloadServer[23;0m[23;0m
+ [1m[92m✓[23;0m Completed [4mdownloadServer[23;0m in 0.04s
+ [1m[92m✓[23;0m Completed [4mdownloadClientMappings[23;0m in 0.04s
+[1m*** Started working on [4mdownloadClient[23;0m[23;0m
+ [1m[92m✓[23;0m Completed [4mdownloadClient[23;0m in 0.00s
+[1m*** Started working on [4mmergeMappings[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mmergeMappings[23;0m in 0.00s
+[1m*** Started working on [4mstripClient[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mstripClient[23;0m in 0.00s
+[1m*** Started working on [4mextractServer[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mextractServer[23;0m in 0.00s
+[1m*** Started working on [4mstripServer[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mstripServer[23;0m in 0.00s
+[1m*** Started working on [4mmerge[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mmerge[23;0m in 0.00s
+[1m*** Started working on [4mrename[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mrename[23;0m in 0.00s
+[1m*** Started working on [4mdecompile[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mdecompile[23;0m in 0.00s
+[1m*** Started working on [4minject[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4minject[23;0m in 0.00s
+[1m*** Started working on [4mpatch[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mpatch[23;0m in 0.00s
+[1m*** Started working on [4mapplyNeoforgePatches[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mapplyNeoforgePatches[23;0m in 0.00s
+[1m*** Started working on [4mtransformSources[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4mtransformSources[23;0m in 0.00s
+[1m*** Started working on [4mrecompile[23;0m[23;0m
+ 96 items on the compile classpath
+ 0 items on the sourcepath
+[1m*** Started working on [4msourcesWithNeoForge[23;0m[23;0m
+ [1m[92m♻[23;0m Used cache of [4msourcesWithNeoForge[23;0m in 0.00s
+ Compiling 5364 source files
+Copied 0 resource files
+ [1m[92m✓[23;0m Completed [4mrecompile[23;0m in 58.46s
+[1m*** Started working on [4mcompiledWithNeoForge[23;0m[23;0m
+ [1m[92m✓[23;0m Completed [4mcompiledWithNeoForge[23;0m in 6.53s
+[1m*** Started working on [4msourcesAndCompiledWithNeoForge[23;0m[23;0m
+ [1m[92m✓[23;0m Completed [4msourcesAndCompiledWithNeoForge[23;0m in 3.03s
+Total runtime: 72.69s
+
+
+> Task :compileJava
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientNetworkController.java:12: error: package net.neoforged.neoforge.fml.loading does not exist
+import net.neoforged.neoforge.fml.loading.FMLPaths;
+                                         ^
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/minecraft/LanWorldManager.java:56: error: cannot find symbol
+            if (PortAllocator.isTcpFree(port) && server.publishServer(gameType, cheats, port)) {
+                ^
+  symbol:   variable PortAllocator
+  location: class LanWorldManager
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/minecraft/LanWorldManager.java:59: error: cannot find symbol
+            port = PortAllocator.pickFree(port + 1, false, 32);
+                   ^
+  symbol:   variable PortAllocator
+  location: class LanWorldManager
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/minecraft/LanWorldManager.java:69: error: cannot find symbol
+        ServerAddress address = ServerAddress.parseFromString(host + ":" + port);
+                                             ^
+  symbol:   method parseFromString(String)
+  location: class ServerAddress
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/core/EasyTierProcessManager.java:157: error: no suitable method found for waitFor(int)
+            if (!p.waitFor(10)) {
+                  ^
+    method Process.waitFor() is not applicable
+      (actual and formal argument lists differ in length)
+    method Process.waitFor(long,TimeUnit) is not applicable
+      (actual and formal argument lists differ in length)
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/core/EasyTierProcessManager.java:160: error: no suitable method found for waitFor(int)
+                p.waitFor(5);
+                 ^
+    method Process.waitFor() is not applicable
+      (actual and formal argument lists differ in length)
+    method Process.waitFor(long,TimeUnit) is not applicable
+      (actual and formal argument lists differ in length)
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/network/NetworkManager.java:98: error: cannot find symbol
+        lastNode = NodeParser.parse(nodeRes.stdout());
+                   ^
+  symbol:   variable NodeParser
+  location: class NetworkManager
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/network/PortForwardManager.java:54: error: cannot find symbol
+        if (processManager.isRunning()) {
+                          ^
+  symbol:   method isRunning()
+  location: variable processManager of type EasyTierProcessManager
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/network/PortForwardManager.java:57: error: method start in class EasyTierProcessManager cannot be applied to given types;
+        processManager.start(desired);
+                      ^
+  required: no arguments
+  found:    NetworkProfile
+  reason: actual and formal argument lists differ in length
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/core/EasyTierCommandBuilder.java:54: error: cannot find symbol
+        for (PortRule rule : p.forwards()) {
+             ^
+  symbol:   class PortRule
+  location: class EasyTierCommandBuilder
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientNetworkController.java:36: error: package FMLPaths does not exist
+            instance = new ClientNetworkController(FMLPaths.CONFIGDIR.get());
+                                                           ^
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientNetworkController.java:93: error: cannot find symbol
+        return processManager != null && processManager.isRunning();
+                                                       ^
+  symbol:   method isRunning()
+  location: variable processManager of type EasyTierProcessManager
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/screen/JoinNetworkScreen.java:38: error: cannot find symbol
+        NetworkProfile p = profileFromConfig();
+                           ^
+  symbol:   method profileFromConfig()
+  location: class JoinNetworkScreen
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/screen/CreateNetworkScreen.java:44: error: cannot find symbol
+        NetworkProfile p = profileFromConfig();
+                           ^
+  symbol:   method profileFromConfig()
+  location: class CreateNetworkScreen
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientInitializer.java:21: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+    @EventBusSubscriber(modid = EasyTierMinecraft.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                              ^
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientInitializer.java:21: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+    @EventBusSubscriber(modid = EasyTierMinecraft.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+                                                                                                      ^
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientInitializer.java:34: warning: [removal] bus() in EventBusSubscriber has been deprecated and marked for removal
+    @EventBusSubscriber(modid = EasyTierMinecraft.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+                                                                              ^
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/client/ClientInitializer.java:34: warning: [removal] Bus in EventBusSubscriber has been deprecated and marked for removal
+    @EventBusSubscriber(modid = EasyTierMinecraft.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+                                                                                                      ^
+/home/ecs-user/workspace/et-in-mc/src/main/java/dev/etmc/server/ServerCommands.java:33: error: bad operand types for binary operator '>='
+                        + (p.latencyMs() >= 0 ? " " + p.latencyMs() + "ms" : "")),
+                                         ^
+  first type:  String
+  second type: int
+15 errors
+4 warnings
+
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 1m 47s
+2 actionable tasks: 2 executed

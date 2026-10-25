@@ -31,7 +31,7 @@ public final class EasyTierProcessManager implements AutoCloseable {
 
     private static final Logger LOG = LoggerFactory.getLogger("etmc");
 
-    private final NetworkProfile profile;
+    private NetworkProfile profile;
     private final CommandFactory commandFactory;
     private final Path workDir;
     private final boolean autoRestart;
@@ -62,6 +62,19 @@ public final class EasyTierProcessManager implements AutoCloseable {
                 new SecretRedactor(profile.networkSecret()), LOG, "[easytier]");
     }
 
+    /** Rebinds the profile (e.g. changed forwards) and (re)starts the core. */
+    public synchronized void start(NetworkProfile profile) {
+        this.profile = profile;
+        start();
+    }
+
+    /** True while the core process exists and is not shutting down. */
+    public synchronized boolean isRunning() {
+        ProcessState st = state();
+        return st != ProcessState.STOPPED && st != ProcessState.ERROR
+                && st != ProcessState.STOPPING;
+    }
+
     public synchronized void start() {
         if (state.get() != ProcessState.STOPPED && state.get() != ProcessState.ERROR) {
             throw new IllegalStateException("cannot start from state " + state.get());
@@ -90,11 +103,44 @@ public final class EasyTierProcessManager implements AutoCloseable {
         stopping = false;
         startedAt = System.currentTimeMillis();
         setState(ProcessState.STARTING);
+        logReader.onLine(this::handleCoreLogLine);
         logReader.start(process.getInputStream());
         long pid = process.pid();
         LOG.info("[etmc] easytier started pid={} role={} listen={} rpc=127.0.0.1:{}",
                 pid, profile.role(), profile.listenPort(), profile.rpcPort());
         Thread.ofPlatform().name("etmc-process-watch").daemon(true).start(this::watchLoop);
+    }
+
+    /**
+     * Log-driven state transitions (plan §7.2): network connectivity must be
+     * judged separately from process liveness. Lines verified against
+     * easytier 2.6.4 output (docs/P0-REPORT.md).
+     */
+    private void handleCoreLogLine(String line) {
+        ProcessState cur = state();
+        if (cur == ProcessState.STOPPED || cur == ProcessState.ERROR
+                || cur == ProcessState.STOPPING) {
+            return;
+        }
+        if (line.contains("Starting easytier from cli")) {
+            if (cur == ProcessState.STARTING) {
+                setState(ProcessState.CONNECTING);
+            }
+        } else if (line.contains("new peer connection added")) {
+            if (cur == ProcessState.STARTING || cur == ProcessState.CONNECTING
+                    || cur == ProcessState.RECONNECTING) {
+                setState(ProcessState.CONNECTED);
+                restartCount = 0;
+                LOG.info("[etmc] easytier connected to the network");
+            }
+        } else if (line.contains("handshake failed")
+                || line.contains("peer connection lost")
+                || line.contains("connection closed during")) {
+            if (cur == ProcessState.CONNECTED || cur == ProcessState.READY) {
+                setState(ProcessState.RECONNECTING);
+                LOG.warn("[etmc] easytier lost network connectivity; reconnecting");
+            }
+        }
     }
 
     private void watchLoop() {
@@ -154,10 +200,10 @@ public final class EasyTierProcessManager implements AutoCloseable {
         setState(ProcessState.STOPPING);
         p.destroy();
         try {
-            if (!p.waitFor(10)) {
+            if (!p.waitFor(10, java.util.concurrent.TimeUnit.SECONDS)) {
                 LOG.warn("[etmc] easytier did not exit in 10s, killing forcibly");
                 p.destroyForcibly();
-                p.waitFor(5);
+                p.waitFor(5, java.util.concurrent.TimeUnit.SECONDS);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

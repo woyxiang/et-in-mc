@@ -1,1 +1,23 @@
 > Task :createMinecraftArtifacts
+> Task :createMinecraftArtifacts FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':createMinecraftArtifacts'.
+> Error while evaluating property 'artifactManifestEntries' of task ':createMinecraftArtifacts'.
+   > Could not resolve all artifacts for configuration ':neoFormRuntimeExternalTools'.
+      > Could not download DiffPatch-2.0.0.36-all.jar (io.codechicken:DiffPatch:2.0.0.36)
+         > Could not get resource 'https://maven.neoforged.net/releases/io/codechicken/DiffPatch/2.0.0.36/DiffPatch-2.0.0.36-all.jar'.
+            > Could not GET 'https://maven.neoforged.net/releases/io/codechicken/DiffPatch/2.0.0.36/DiffPatch-2.0.0.36-all.jar'.
+               > The server may not support the client's requested TLS protocol versions: (TLSv1.2, TLSv1.3). You may need to configure the client to allow other protocols to be used. For more on this, please refer to https://docs.gradle.org/8.10.2/userguide/build_environment.html#sec:gradle_system_properties in the Gradle documentation.
+                  > Remote host terminated the handshake
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1h 12m 59s
+1 actionable task: 1 executed

@@ -78,6 +78,54 @@ public final class ModConfig {
         return new Loaded(profile, errors, created);
     }
 
+    /**
+     * Persists a profile back to etmc-networks.toml + etmc-private.toml
+     * (plan §4.2 step 4). The secret never touches the networks file.
+     * Unknown keys are preserved; comments are not.
+     */
+    public static void save(NetworkProfile profile, Path configDir) {
+        Path networkFile = configDir.resolve("etmc-networks.toml");
+        Path privateFile = configDir.resolve("etmc-private.toml");
+        try (FileConfig net = FileConfig.builder(networkFile).build()) {
+            net.load();
+            net.set("network.role", profile.role() == NetworkProfile.Role.HOST ? "host" : "client");
+            net.set("network.name", profile.networkName());
+            net.set("network.listen_port", profile.listenPort());
+            net.set("network.rpc_port", profile.rpcPort());
+            net.set("network.host_ip", profile.hostIp());
+            net.set("network.client_ip", profile.clientIp());
+            net.set("network.dhcp", profile.dhcp());
+            net.set("network.expose_local_cidr", profile.exposeLocalCidr());
+            net.set("network.peers", profile.peers());
+            net.set("exposure.mode", profile.exposureMode());
+            net.set("exposure.tcp_whitelist", profile.tcpWhitelist());
+            net.set("exposure.udp_whitelist", profile.udpWhitelist());
+            net.set("security.trusted_all_confirmed", profile.trustedAllConfirmed());
+            List<com.electronwill.nightconfig.core.Config> rules = new ArrayList<>();
+            for (PortRule r : profile.forwards()) {
+                var c = com.electronwill.nightconfig.core.Config.inMemory();
+                c.set("name", r.name());
+                c.set("protocol", r.protocol());
+                c.set("local_port", r.localPort());
+                c.set("remote_host", r.remoteHost());
+                c.set("remote_port", r.remotePort());
+                c.set("enabled", r.enabled());
+                rules.add(c);
+            }
+            net.set("client_proxy.rules", rules);
+            net.save();
+        } catch (Exception e) {
+            throw new RuntimeException("failed to save etmc-networks.toml: " + e.getMessage(), e);
+        }
+        try (FileConfig priv = FileConfig.builder(privateFile).build()) {
+            priv.load();
+            priv.set("network.secret", profile.networkSecret() == null ? "" : profile.networkSecret());
+            priv.save();
+        } catch (Exception e) {
+            throw new RuntimeException("failed to save etmc-private.toml: " + e.getMessage(), e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     private static List<PortRule> readRules(FileConfig net) {
         List<PortRule> rules = new ArrayList<>();

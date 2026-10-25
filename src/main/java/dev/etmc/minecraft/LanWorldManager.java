@@ -1,5 +1,6 @@
 package dev.etmc.minecraft;
 
+import dev.etmc.network.PortAllocator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.gui.screens.ConnectScreen;
@@ -66,7 +67,7 @@ public final class LanWorldManager {
 
     /** Starts the vanilla "Direct Join" flow against a host:port. */
     public static void joinHost(String host, int port) {
-        ServerAddress address = ServerAddress.parseFromString(host + ":" + port);
+        ServerAddress address = ServerAddress.parseString(host + ":" + port);
         ServerData data = new ServerData("etmc-local", host + ":" + port,
                 ServerData.Type.OTHER);
         ConnectScreen.startConnecting(new TitleScreen(),

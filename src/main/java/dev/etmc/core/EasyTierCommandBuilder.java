@@ -2,6 +2,7 @@ package dev.etmc.core;
 
 import dev.etmc.config.ConfigValidator;
 import dev.etmc.config.NetworkProfile;
+import dev.etmc.config.PortRule;
 import java.util.ArrayList;
 import java.util.List;
 

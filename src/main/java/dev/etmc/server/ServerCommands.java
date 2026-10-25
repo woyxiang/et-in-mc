@@ -12,6 +12,14 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
  * Permission level 2 (ops) — network control must not be wide open.
  */
 public final class ServerCommands {
+    private static String latencySuffix(String latency) {
+        try {
+            return " " + Double.parseDouble(latency) + "ms";
+        } catch (NumberFormatException e) {
+            return "";
+        }
+    }
+
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
         LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("etmc")
@@ -30,7 +38,7 @@ public final class ServerCommands {
             for (var p : peers) {
                 ctx.getSource().sendSuccess(() -> Component.literal("[etmc] "
                         + p.virtualIp() + " " + p.hostname() + " " + p.cost()
-                        + (p.latencyMs() >= 0 ? " " + p.latencyMs() + "ms" : "")),
+                        + latencySuffix(p.latencyMs())),
                         false);
             }
             return peers.size();

@@ -62,9 +62,12 @@ class ProcessManagerTest {
     @Test
     void quickDeathBecomesErrorNotRestart(@TempDir Path tmp) throws Exception {
         Assumptions.assumeTrue(System.getProperty("os.name").contains("Linux"));
-        // "false" exits with code 1 immediately - simulates bind failure (P0 finding #3)
+        // exits with code 1 immediately - simulates bind failure (P0 finding #3)
+        Path failingScript = tmp.resolve("failing-core.sh");
+        java.nio.file.Files.writeString(failingScript, "#!/bin/sh\nexit 1\n");
+        failingScript.toFile().setExecutable(true);
         var mgr = new EasyTierProcessManager(stubProfile(),
-                p -> List.of("false"), tmp, true, 5, 3000);
+                p -> List.of(failingScript.toString()), tmp, true, 5, 3000);
         mgr.start();
         long deadline = System.currentTimeMillis() + 10_000;
         while (mgr.state() != ProcessState.ERROR && System.currentTimeMillis() < deadline) {

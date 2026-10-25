@@ -41,6 +41,9 @@ public final class PortAllocator {
      * alternatives, then falls back to a random ephemeral-style port.
      */
     public static int pickFree(int preferred, boolean udp, int max) {
+        if (preferred <= 0 || preferred > 65535) {
+            return -1;
+        }
         if (udp ? isUdpFree(preferred) : isTcpFree(preferred)) {
             return preferred;
         }

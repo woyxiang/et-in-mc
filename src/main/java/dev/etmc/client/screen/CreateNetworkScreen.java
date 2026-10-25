@@ -41,7 +41,7 @@ public class CreateNetworkScreen extends NetworkFormScreen {
             message = "network name and secret must not be empty";
             return;
         }
-        NetworkProfile p = profileFromConfig();
+        NetworkProfile p = ClientNetworkController.get().profileFromConfig();
         p.role(NetworkProfile.Role.HOST)
                 .networkName(name)
                 .networkSecret(secret)

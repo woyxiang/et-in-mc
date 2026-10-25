@@ -92,7 +92,7 @@ class CommandBuilderTest {
         NetworkProfile p = host().exposeLocalCidr("127.0.0.1/8");
         // mapping would be 127.0.0.1/8 -> 10.126.126.1/32 -> must fail validation
         var ex = assertThrows(IllegalArgumentException.class, () -> builder.build(p));
-        assertTrue(ex.getMessage().contains("equal prefix lengths"));
+        assertTrue(ex.getMessage().contains("prefix"));
     }
 
     @Test

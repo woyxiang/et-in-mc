@@ -95,7 +95,7 @@ public final class NetworkManager {
             setPhase(NetworkPhase.RPC_LOST);
             return;
         }
-        lastNode = NodeParser.parse(nodeRes.stdout());
+        lastNode = NodeInfo.parse(nodeRes.stdout());
 
         EasyTierCliRunner.Result peerRes = cli.run(rpcPort, "peer", CLI_TIMEOUT_MS);
         if (peerRes.ok()) {
