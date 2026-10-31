@@ -1,8 +1,12 @@
 pluginManagement {
     repositories {
-        maven {
-            url = uri("http://127.0.0.1:8090")
-            allowInsecureProtocol = true
+        // Local-only accelerating mirror (parallel-range prefetch cache).
+        // Enabled on the dev box only: marker file exists there, CI runners skip it.
+        if (file('/home/ecs-user/tools/maven_mirror.py').exists()) {
+            maven {
+                url = uri("http://127.0.0.1:8090")
+                allowInsecureProtocol = true
+            }
         }
         gradlePluginPortal()
         maven { url = 'https://maven.neoforged.net/releases' }
