@@ -40,3 +40,9 @@ JAVA_TOOL_OPTIONS="-Xmx6g" gradle build        # 打包
 JAVA_TOOL_OPTIONS="-Xmx1g" gradle test         # 29 项测试（含真实 easytier 双实例集成测试）
 JAVA_TOOL_OPTIONS="-Xmx1g" gradle runServer -x downloadAssets   # headless 服务端
 ```
+
+## 第三方组件与许可
+
+- 本 Mod 以 [MIT](LICENSE) 许可证发布。
+- EasyTier Core 采用其自身的许可证（锁定版本 v2.6.4 下为 MIT），**不随本 Mod 打包分发**；由用户自行提供或下载（见安全须知）。上游项目：https://github.com/EasyTier/EasyTier
+- Minecraft 归 Mojang/Microsoft 所有；本 Mod 面向 NeoForge 1.21.1，不包含任何 Minecraft 代码。
