@@ -42,3 +42,8 @@ repo/
 p0/*.log
 run/
 repo/
+
+# build/run logs (local only)
+*.log
+*result.txt
+!docs/**/*.log
